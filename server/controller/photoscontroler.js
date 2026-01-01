@@ -3,8 +3,8 @@ const Photo=require("../models/Photos")
 
 const createNewPhoto=async(req,res) => {
     const{title,imageUrl}=req.body
-    if(!title)
-        return res.status(400).send("title is requierd")
+    if(!imageUrl)
+        return res.status(400).send("imageUrl is requierd")
     const photo=await Photo.create({title,imageUrl})
     if (photo)
         return res.status(200).json(photo)
@@ -14,7 +14,7 @@ const createNewPhoto=async(req,res) => {
 }
 
 const getPhotos=async (req,res)=>{
-    const photo=await Photo.find().lean()
+    const photo=await Photo.find()
     if(!photo)
         return res.status(400).send("not found")
     res.json(photo)
@@ -23,7 +23,7 @@ const getPhotos=async (req,res)=>{
 
 const updatePhoto=async (req,res)=>{
     const{id,title,imageUrl}=req.body
-    if(!id||!title)
+    if(!id||!imageUrl)
         return res.send("id and title are required")
     const photo=await Photo.findById(id)
     if(!photo)

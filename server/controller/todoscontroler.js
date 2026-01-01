@@ -13,7 +13,7 @@ const createNewTodo=async(req,res) => {
 }
 
 const getTodos=async (req,res)=>{
-    const todo=await Todo.find().lean()
+    const todo=await Todo.find()
     if(!todo)
         return res.status(400).send("not found")
     res.json(todo)

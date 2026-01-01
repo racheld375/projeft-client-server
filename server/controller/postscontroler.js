@@ -13,7 +13,7 @@ const createNewPost=async(req,res) => {
 }
 
 const getPosts=async (req,res)=>{
-    const post=await Post.find().lean()
+    const post=await Post.find()
     if(!post)
         return res.status(400).send("not found")
     res.json(post)

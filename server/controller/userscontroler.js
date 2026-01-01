@@ -13,7 +13,7 @@ const createNewUser=async(req,res) => {
 }
 
 const getaUserrs=async (req,res)=>{
-    const user=await User.find().lean()
+    const user=await User.find()
     if(!user)
         return res.status(400).send("not foubd")
     res.json(user)
