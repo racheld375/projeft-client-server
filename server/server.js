@@ -17,11 +17,6 @@ app.use("/ContentManager/posts",require("./routes/postRoute"))
 app.use("/ContentManager/photos",require("./routes/phtoRoute"))
 app.use("/ContentManager/todos",require("./routes/todoRoute"))
 
-
-// app.get("/",(req,res)=>{
-//     res.send("home page")
-// })
-
 mongoose.connection.once('open',err=>{
     console.log("connected to db")
     app.listen(PORT,()=>{

@@ -1,5 +1,7 @@
 const whitelist = [
   "http://localhost:3000",
+  "http://localhost:3003",
+  "http://localhost:3002",
   "https://mydomain.com",
   "https://another-allowed-site.com"
 ];

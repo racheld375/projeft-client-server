@@ -1,35 +1,115 @@
-import React from 'react'
-import { useEffect,useState} from "react"
-import Axios from "axios"
-import { Link } from 'react-router-dom'
-import TodosItem from './TodosItem'
+
+
+import { useEffect, useState } from "react";
+import Axios from "axios";
+import { Link } from 'react-router-dom';
+import TodosItem from './TodosItem';
+import { Grid, Typography, TextField, Checkbox, FormControlLabel, Card } from '@mui/material';
+import { FiSearch } from "react-icons/fi";
+import InputAdornment from '@mui/material/InputAdornment';
 
 const TodosList = () => {
-    const [todos,setTodos] =useState([])
-    const[search,setSearch]=useState("")
-    const[yes,setyes]=useState(false)
-    const fechTodos= async ()=>{
-        const{data}=await Axios.get("http://localhost:7500/ContentManager/todos/")
-        setTodos(data)
-    }
+  const [todos, setTodos] = useState([]);
+  const [search, setSearch] = useState("");
+  const [yes, setYes] = useState(false);
 
-    useEffect(()=>{
-        fechTodos()
-    },[])
+  const fetchTodos = async () => {
+    const { data } = await Axios.get("http://localhost:7500/ContentManager/todos/");
+    setTodos(data);
+  }
 
-    if(todos.length===0) return <h2>loading</h2>
+  useEffect(() => {
+    fetchTodos();
+  }, []);
 
-  return <>
-  <Link to="/todos/Add">add todo</Link>
-    <input value={search} placeholder="search" onChange={(e) => (setSearch(e.target.value))} />
-    <label> <input type="checkbox" checked={yes} onChange={(e) =>  setyes(!yes)} />To complete</label>
-   {yes && todos.filter((t)=> t.title.includes(search)&& !t.completed).map((todo,index)=>{
-    return <TodosItem todo={todo} fechTodos={fechTodos}/>}
-    )}
-  {!yes && todos.filter((t)=> t.title.includes(search)).map((todo,index)=>{
-    return <TodosItem todo={todo} fechTodos={fechTodos}/>}
-    )}
-  </>
+  if (todos.length === 0) return <h2>Loading...</h2>;
+
+  return (
+    <>
+      {/* כותרת עם לינק */}
+      <Typography variant="h6" sx={{ textAlign: 'center', mb: 2 }}>
+        <Link
+          to="/todos/Add"
+          style={{
+            textDecoration: 'none',
+            color: '#ff6f00',
+            fontWeight: 'bold',
+            fontSize: '20px',
+          }}
+          onMouseEnter={(e) => e.target.style.color = '#e65100'}
+          onMouseLeave={(e) => e.target.style.color = '#ff6f00'}
+        >
+          Add todo
+        </Link>
+      </Typography>
+
+      {/* שורה עם חיפוש + To complete */}
+      <Grid container spacing={2} justifyContent="center" alignItems="center" sx={{ mb: 3 }}>
+        {/* תיבת חיפוש */}
+        <Grid item xs={12} sm={6} md={4}>
+          <TextField
+            fullWidth
+            value={search}
+            label="Search todos"
+            variant="filled"
+            onChange={(e) => setSearch(e.target.value)}
+            sx={{ backgroundColor: '#e0f7fa', borderRadius: 1 }}
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <FiSearch />
+                </InputAdornment>
+              ),
+            }}
+          />
+        </Grid>
+
+        {/* Checkbox To complete */}
+        <Grid item xs={12} sm={3} md={2}>
+          <Card
+            sx={{
+              p: 1,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              borderRadius: 2,
+              backgroundColor: '#fff3e0',
+              cursor: 'pointer',
+              '&:hover': { backgroundColor: '#ffe0b2' }
+            }}
+            onClick={() => setYes(!yes)}
+          >
+            <FormControlLabel
+              control={
+                <Checkbox
+                  checked={yes}
+                  onChange={() => setYes(!yes)}
+                  sx={{
+                    color: '#ff6f00',
+                    '&.Mui-checked': { color: '#e65100' },
+                  }}
+                />
+              }
+              label="To complete"
+              sx={{ m: 0, fontWeight: 'bold' }}
+            />
+          </Card>
+        </Grid>
+      </Grid>
+
+      {/* רשימת הכרטיסים */}
+      <Grid container direction="column" spacing={1} alignItems="center">
+        {(yes ? todos.filter(t => t.title.toLowerCase().includes(search.toLowerCase()) && !t.completed)
+          : todos.filter(t => t.title.toLowerCase().includes(search.toLowerCase()))
+        ).map(todo => (
+          <Grid item xs={12} key={todo._id} sx={{ width: '900px' }}>
+            <TodosItem todo={todo} fechTodos={fetchTodos} />
+          </Grid>
+        ))}
+      </Grid>
+    </>
+  );
 }
 
-export default TodosList
+export default TodosList;
+

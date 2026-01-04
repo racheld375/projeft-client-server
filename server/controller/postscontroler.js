@@ -20,13 +20,13 @@ const getPosts=async (req,res)=>{
 }
 
 
-// const getbyid=async (req,res)=>{
-//     const {id}=req.params
-//     const takst=await Task.findById(id)
-//     if(!takst)
-//         return res.status(400).send("not foubd")
-//     res.json(takst)
-// }
+const getTopPosts=async (req,res)=>{
+    const post=await Post.find().limit(5)
+    if(!post)
+        return res.status(400).send("not found")
+    res.json(post)
+}
+
 const updatePost=async (req,res)=>{
     const{id,title,body}=req.body
     if(!id||!title)
@@ -49,13 +49,5 @@ const deletePost=async(req,res)=>{
     const reply=`post'${resukt.name}'id ${resukt._id} deleted`
     res.json(reply)
 }
-// const updatecomplete=async(req,res)=>{
-//  const{id}=req.params
-//  const task=await Task.findById(id).exec()
-//  if(!task)
-//     return res.status(400).json({massag:"not found"})
-//  task.complete=!task.complete
-//  const updatetask=await task.save()
-//  res.json(`'${updatetask.name}' updeted`)
-// }
-module.exports={createNewPost,getPosts,updatePost,deletePost}
+
+module.exports={createNewPost,getPosts,updatePost,deletePost,getTopPosts}
