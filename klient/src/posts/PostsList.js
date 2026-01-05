@@ -3,9 +3,12 @@ import { useEffect, useState } from "react";
 import Axios from "axios";
 import { Link } from 'react-router-dom';
 import PostsItem from './PostsItem';
-import { Grid, Typography, TextField, Checkbox, FormControlLabel, Card } from '@mui/material';
+import { Grid, Button, TextField, Checkbox, FormControlLabel, Card } from '@mui/material';
 import { FiSearch } from "react-icons/fi";
 import InputAdornment from '@mui/material/InputAdornment';
+import { MdAddToPhotos } from "react-icons/md";
+
+
 
 const PostsList = () => {
   const [posts, setPosts] = useState([])
@@ -31,9 +34,36 @@ const PostsList = () => {
 
   return (
     <>
-      <Typography variant="h6" sx={{ textAlign: 'center', mb: 2 }}>
-        <Link to="/posts/Add" style={{ textDecoration: 'none', color: '#ff6f00', fontWeight: 'bold', fontSize: '20px', }} onMouseEnter={(e) => e.target.style.color = '#e65100'} onMouseLeave={(e) => e.target.style.color = '#ff6f00'} > Add post</Link>
-      </Typography>
+      <Grid
+  container
+  justifyContent="flex-end"
+  sx={{
+    mb: 2,
+    position: 'relative',
+    right: '-350px'   // או -24px לפי ה־theme
+  }}
+>
+
+  <Link to="/posts/Add" style={{ textDecoration: 'none' }}>
+    <Button
+    startIcon={<MdAddToPhotos  />}
+      variant="contained"
+      sx={{
+        borderRadius: '10px',   // קצוות עגולים מעט
+        px: 3,
+        py: 1,
+        backgroundColor: '#ff6f00d6',
+        fontWeight: 'bold',
+        textTransform: 'none',
+        '&:hover': {
+          backgroundColor: '#ff6f00b1',
+        },
+      }}
+    >
+      
+    </Button>
+  </Link>
+</Grid>
 
 
 

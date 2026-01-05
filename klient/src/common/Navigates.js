@@ -1,14 +1,14 @@
 
 import { NavLink } from 'react-router-dom';
 import { Box, Typography } from '@mui/material';
-import { MdTaskAlt, MdOutlinePostAdd, MdSupervisedUserCircle, MdAddPhotoAlternate } from "react-icons/md";
+import { MdTask , MdCompost , MdSupervisedUserCircle, MdImage   } from "react-icons/md";
 
 const Navigates = () => {
   const links = [
     { to: "/users", label: "users", icon: <MdSupervisedUserCircle /> },
-    { to: "/todos", label: "todos", icon: <MdTaskAlt /> },
-    { to: "/posts", label: "posts", icon: <MdOutlinePostAdd /> },
-    { to: "/photos", label: "photos", icon: <MdAddPhotoAlternate /> },
+    { to: "/todos", label: "todos", icon: <MdTask  /> },
+    { to: "/posts", label: "posts", icon: <MdCompost  /> },
+    { to: "/photos", label: "photos", icon: <MdImage   /> },
   ];
 
   return (

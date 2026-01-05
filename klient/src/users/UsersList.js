@@ -2,9 +2,10 @@ import { useEffect, useState } from "react";
 import Axios from "axios";
 import { Link } from 'react-router-dom';
 import UsersItem from './UsersItem';
+import { GoPersonAdd } from "react-icons/go";
 import {
   Grid,
-  Typography,
+  Button,
   TextField,
   Card,
   Radio,
@@ -32,20 +33,39 @@ const UsersList = () => {
 
   return (
     <>
-      {/* Add user */}
-      <Typography variant="h6" sx={{ textAlign: 'center', mb: 2 }}>
-        <Link
-          to="/users/Add"
-          style={{
-            textDecoration: 'none',
-            color: '#ff6f00',
-            fontWeight: 'bold',
-            fontSize: '20px',
-          }}
-        >
-          Add user
-        </Link>
-      </Typography>
+{/* Add user button */}
+<Grid
+  container
+  justifyContent="flex-end"
+  sx={{
+    mb: 2,
+    position: 'relative',
+    right: '-350px'   // או -24px לפי ה־theme
+  }}
+>
+
+  <Link to="/users/Add" style={{ textDecoration: 'none' }}>
+    <Button
+    startIcon={<GoPersonAdd />}
+      variant="contained"
+      sx={{
+        borderRadius: '10px',   // קצוות עגולים מעט
+        px: 3,
+        py: 1,
+        backgroundColor: '#ff6f00d6',
+        fontWeight: 'bold',
+        textTransform: 'none',
+        '&:hover': {
+          backgroundColor: '#ff6f00b1',
+        },
+      }}
+    >
+      
+    </Button>
+  </Link>
+</Grid>
+
+
 
       {/* Search + radios */}
       <Grid container spacing={2} justifyContent="center" alignItems="center" sx={{ mb: 3 }}>

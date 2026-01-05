@@ -3,8 +3,8 @@ import { useEffect, useState } from "react";
 import Axios from "axios";
 import { Link } from 'react-router-dom';
 import PhotosItem from './PhotosItem';
-import { Grid, Typography } from '@mui/material';
-
+import { Grid, Button } from '@mui/material';
+import { MdOutlineAddPhotoAlternate } from "react-icons/md";
 const PhotosList = () => {
   const [photos, setPhotos] = useState([]);
 
@@ -21,9 +21,36 @@ const PhotosList = () => {
 
   return (
     <>
-      <Typography variant="h6" sx={{ textAlign: 'center', mb: 2 }}>
-        <Link to="/photos/Add" style={{ textDecoration: 'none', color: '#ff6f00', fontWeight: 'bold', fontSize: '20px', }} onMouseEnter={(e) => e.target.style.color = '#e65100'} onMouseLeave={(e) => e.target.style.color = '#ff6f00'} > Add Photo</Link>
-      </Typography>
+       <Grid
+  container
+  justifyContent="flex-end"
+  sx={{
+    mb: 2,
+    position: 'relative',
+    right: '-350px'   // או -24px לפי ה־theme
+  }}
+>
+
+  <Link to="/posts/Add" style={{ textDecoration: 'none' }}>
+    <Button
+    startIcon={<MdOutlineAddPhotoAlternate  />}
+      variant="contained"
+      sx={{
+        borderRadius: '10px',   // קצוות עגולים מעט
+        px: 3,
+        py: 1,
+        backgroundColor: '#ff6f00d6',
+        fontWeight: 'bold',
+        textTransform: 'none',
+        '&:hover': {
+          backgroundColor: '#ff6f00b1',
+        },
+      }}
+    >
+      
+    </Button>
+  </Link>
+</Grid>
 
       <Grid container spacing={2} justifyContent="center">
         {photos.map((photo) => (
