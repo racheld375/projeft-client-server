@@ -22,9 +22,10 @@ const AddTodos = () => {
     tags: []
   })
   const naviage = useNavigate()
+  
   const submitForm = async (e) => {
     e.preventDefault()
-    const { data } = await axios.todo("http://localhost:7500/ContentManager/todos/", { title: values.title, tags: values.tags, completed: values.completed })
+    const { data } = await axios.post("http://localhost:7500/ContentManager/todos/", { title: values.title, tags: values.tags, completed: values.completed })
     setValue({
       title: "",
       completed: false,

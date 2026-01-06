@@ -31,7 +31,7 @@ const PhotosList = () => {
   }}
 >
 
-  <Link to="/posts/Add" style={{ textDecoration: 'none' }}>
+  <Link to="/photos/Add" style={{ textDecoration: 'none' }}>
     <Button
     startIcon={<MdOutlineAddPhotoAlternate  />}
       variant="contained"
